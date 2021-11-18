@@ -1,42 +1,87 @@
+import json
+
+import cv2
 import cv2.cv2 as cv2
 import depthai as dai
+import argparse
 import requests
 import os
 
 directory = r"C:\Users\ckirc\Pictures\plant detection"
-url = r''
+api_key = '2b10glUixSPZOunMJ952kc5Pe'
+url = f'https://my-api.plantnet.org/v2/identify/all?api-key={api_key}'
 nr_imgs = 3
 os.chdir(directory)
 
 
 # main method
-def detect_plants():
-    # setup ressources
-    cap = cv2.VideoCapture(0)
-    detector = cv2.QRCodeDetector()
+def detect_plants(use_pi):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--pi', nargs='?', help="use default sys cam")
+    args = parser.parse_args()
 
-    # take images
-    take_images(cap, detector)
+    if args.pi or use_pi:
+        # setup resources
+        cap = cv2.VideoCapture(0)
+        detector = cv2.QRCodeDetector()
 
-    # show images for debugging
-    show_images()
+        # take images
+        take_images(cap, detector)
 
-    # send images to API
-    send_imgs_to_API()
+        # show images for debugging
+        show_images()
 
-    # release all ressources
-    cap.release()
-    cv2.destroyAllWindows()
+        # send images to API
+        send_imgs_to_API()
+
+        # release all ressources
+        cap.release()
+        cv2.destroyAllWindows()
+    else:
+        # setup resources
+        pipeline = dai.Pipeline()
+
+        # Define source and outputs
+        cam_rgb = pipeline.create(dai.node.ColorCamera)
+        xout_video = pipeline.create(dai.node.XLinkOut)
+
+        xout_video.setStreamName("video")
+
+        # Properties
+        cam_rgb.setBoardSocket(dai.CameraBoardSocket.RGB)
+        cam_rgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
+        cam_rgb.setInterleaved(True)
+        cam_rgb.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
+
+        # Linking
+        cam_rgb.video.link(xout_video.input)
+
+        # qr detector
+        detector = cv2.QRCodeDetector()
+
+        # Connect to device and start pipeline
+        with dai.Device(pipeline) as device:
+            video = device.getOutputQueue('video')
+            take_images(video, detector, True)
+            show_images()
+            send_imgs_to_API()
 
 
-def run_detection(cap, detector):
+def run_detection(cap, detector, use_oak):
     while True:
-        _, img = cap.read()
+        if use_oak:
+            img = cap.get().getCvFrame()
+        else:
+            _, img = cap.read()
         data, bbox, _ = detector.detectAndDecode(img)
         if bbox is not None and data:
             if data:
                 print("data found: ", data)
                 break
+        # debug
+        cv2.imshow("code detector", img)
+        cv2.waitKey(1)
+    cv2.destroyAllWindows()
     return data, img
 
 
@@ -87,12 +132,14 @@ def show_images():
         cv2.destroyAllWindows()
         return
 
-
+#debug
 def plant_qr_detector(cap, detector):
     qr_found = False
     while not qr_found:
         _, img = cap.read()
         data, bbox, _ = detector.detectAndDecode(img)
+        cv2.imshow("code detector", img)
+        cv2.waitKey(1)
         if bbox is not None and data:
             qr_found = True
             print("data found: ", data)
@@ -102,17 +149,18 @@ def plant_qr_detector(cap, detector):
     return data, img
 
 
-def take_images(cap, detector):
+def take_images(cap, detector, use_oak=False):
     x = 0
     attempt = 0
     while x < nr_imgs and attempt < 10:
         # _, img = plant_qr_detector()
-        _, img = run_detection(cap, detector)
+        _, img = run_detection(cap, detector, use_oak)
         attempt += 1
         if img.any():
             cv2.imwrite(f'{directory}\\plant_pic_{x}.jpg', img)
             x += 1
             move_a_little_forward()
+            print("img taken")
         else:
             move_a_little_backward()
 
@@ -121,11 +169,19 @@ def send_imgs_to_API():
     x = 0
     while x < nr_imgs:
         name_img = f'{directory}\\plant_pic_{x}.jpg'
-        img = cv2.imread(name_img)
+        img = open(name_img, 'rb')
         if img:
-            files = {'image': (name_img, img, 'multipart/form-data', {'Expires': '0'})}
-            with requests.Session() as s:
-                r = s.post(url, files=files)
+            files = [('images', (name_img, img))]
+            data = {'organs': ['leaf']}
+            # , 'multipart/form-data', {'Expires': '0'}
+            req = requests.Request('POST', url=url, files=files, data=data)
+            prep = req.prepare()
+            s = requests.Session()
+            r = s.send(prep)
+            print(json.loads(r.text))
+            # with requests.Session() as s:
+            #     r = s.post(url, files=files, data=data)
+            #     print(json.loads(r.text))
         x += 1
 
 
@@ -169,7 +225,7 @@ def det_dai():
     cam_rgb.video.link(xout_video.input)
 
     # qr detector
-    detector = cv2.cv2.QRCodeDetector()
+    detector = cv2.QRCodeDetector()
 
     # Connect to device and start pipeline
     with dai.Device(pipeline) as device:
@@ -179,10 +235,11 @@ def det_dai():
         while True:
             video_frame = video.get()
 
-            data, bbox, _ = detector.detectAndDecode(video_frame)
+            data, bbox, _ = detector.detectAndDecode(video_frame.getCvFrame())
             if bbox is not None and data:
                 print("data found: ", data)
                 break
 
             if cv2.waitKey(1) == ord('q'):
                 break
+

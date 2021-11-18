@@ -1,0 +1,719 @@
+<?xml version="1.0"?>
+<mapping>
+	<map>
+		<framework name="data" output_port_id="data" />
+		<IR name="data" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="data/bn/mean/Fused_Mul_" output_port_id="data" />
+		<IR name="data/bn/mean/Fused_Mul_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage1/Fused_Add_" output_port_id="stage1" />
+		<IR name="stage1/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage1/relu" output_port_id="stage1" />
+		<IR name="stage1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage2" output_port_id="stage2" />
+		<IR name="stage2" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage3_1/conv1" output_port_id="stage3_1/conv1" />
+		<IR name="stage3_1/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_1/conv1/relu" output_port_id="stage3_1/conv1" />
+		<IR name="stage3_1/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage3_1/conv2" output_port_id="stage3_1/conv2" />
+		<IR name="stage3_1/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_1/conv3" output_port_id="stage3_1/conv3" />
+		<IR name="stage3_1/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_1/relu" output_port_id="stage3_1/conv3" />
+		<IR name="stage3_1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage3_2/conv1" output_port_id="stage3_2/conv1" />
+		<IR name="stage3_2/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_2/conv1/relu" output_port_id="stage3_2/conv1" />
+		<IR name="stage3_2/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage3_2/conv2" output_port_id="stage3_2/conv2" />
+		<IR name="stage3_2/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_2/conv3" output_port_id="stage3_2/conv3" />
+		<IR name="stage3_2/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_2/sum" output_port_id="stage3_2/sum" />
+		<IR name="stage3_2/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_2/relu" output_port_id="stage3_2/sum" />
+		<IR name="stage3_2/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage3_3/conv1" output_port_id="stage3_3/conv1" />
+		<IR name="stage3_3/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_3/conv1/relu" output_port_id="stage3_3/conv1" />
+		<IR name="stage3_3/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage3_3/conv2" output_port_id="stage3_3/conv2" />
+		<IR name="stage3_3/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_3/conv3" output_port_id="stage3_3/conv3" />
+		<IR name="stage3_3/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_3/sum" output_port_id="stage3_3/sum" />
+		<IR name="stage3_3/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_3/relu" output_port_id="stage3_3/sum" />
+		<IR name="stage3_3/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage3_4/conv1" output_port_id="stage3_4/conv1" />
+		<IR name="stage3_4/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_4/conv1/relu" output_port_id="stage3_4/conv1" />
+		<IR name="stage3_4/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage3_4/conv2" output_port_id="stage3_4/conv2" />
+		<IR name="stage3_4/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_4/conv3" output_port_id="stage3_4/conv3" />
+		<IR name="stage3_4/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_4/sum" output_port_id="stage3_4/sum" />
+		<IR name="stage3_4/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage3_4/relu" output_port_id="stage3_4/sum" />
+		<IR name="stage3_4/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_1/conv1" output_port_id="stage4_1/conv1" />
+		<IR name="stage4_1/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_1/conv1/relu" output_port_id="stage4_1/conv1" />
+		<IR name="stage4_1/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_1/conv2" output_port_id="stage4_1/conv2" />
+		<IR name="stage4_1/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_1/conv3" output_port_id="stage4_1/conv3" />
+		<IR name="stage4_1/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_1/relu" output_port_id="stage4_1/conv3" />
+		<IR name="stage4_1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_2/conv1" output_port_id="stage4_2/conv1" />
+		<IR name="stage4_2/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_2/conv1/relu" output_port_id="stage4_2/conv1" />
+		<IR name="stage4_2/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_2/conv2" output_port_id="stage4_2/conv2" />
+		<IR name="stage4_2/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_2/conv3" output_port_id="stage4_2/conv3" />
+		<IR name="stage4_2/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_2/sum" output_port_id="stage4_2/sum" />
+		<IR name="stage4_2/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_2/relu" output_port_id="stage4_2/sum" />
+		<IR name="stage4_2/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_3/conv1" output_port_id="stage4_3/conv1" />
+		<IR name="stage4_3/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_3/conv1/relu" output_port_id="stage4_3/conv1" />
+		<IR name="stage4_3/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_3/conv2" output_port_id="stage4_3/conv2" />
+		<IR name="stage4_3/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_3/conv3" output_port_id="stage4_3/conv3" />
+		<IR name="stage4_3/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_3/sum" output_port_id="stage4_3/sum" />
+		<IR name="stage4_3/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_3/relu" output_port_id="stage4_3/sum" />
+		<IR name="stage4_3/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_4/conv1" output_port_id="stage4_4/conv1" />
+		<IR name="stage4_4/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_4/conv1/relu" output_port_id="stage4_4/conv1" />
+		<IR name="stage4_4/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_4/conv2" output_port_id="stage4_4/conv2" />
+		<IR name="stage4_4/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_4/conv3" output_port_id="stage4_4/conv3" />
+		<IR name="stage4_4/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_4/sum" output_port_id="stage4_4/sum" />
+		<IR name="stage4_4/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_4/relu" output_port_id="stage4_4/sum" />
+		<IR name="stage4_4/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_5/conv1" output_port_id="stage4_5/conv1" />
+		<IR name="stage4_5/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_5/conv1/relu" output_port_id="stage4_5/conv1" />
+		<IR name="stage4_5/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_5/conv2" output_port_id="stage4_5/conv2" />
+		<IR name="stage4_5/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_5/conv3" output_port_id="stage4_5/conv3" />
+		<IR name="stage4_5/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_5/sum" output_port_id="stage4_5/sum" />
+		<IR name="stage4_5/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_5/relu" output_port_id="stage4_5/sum" />
+		<IR name="stage4_5/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_6/conv1" output_port_id="stage4_6/conv1" />
+		<IR name="stage4_6/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_6/conv1/relu" output_port_id="stage4_6/conv1" />
+		<IR name="stage4_6/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_6/conv2" output_port_id="stage4_6/conv2" />
+		<IR name="stage4_6/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_6/conv3" output_port_id="stage4_6/conv3" />
+		<IR name="stage4_6/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_6/sum" output_port_id="stage4_6/sum" />
+		<IR name="stage4_6/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_6/relu" output_port_id="stage4_6/sum" />
+		<IR name="stage4_6/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_7/conv1" output_port_id="stage4_7/conv1" />
+		<IR name="stage4_7/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_7/conv1/relu" output_port_id="stage4_7/conv1" />
+		<IR name="stage4_7/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_7/conv2" output_port_id="stage4_7/conv2" />
+		<IR name="stage4_7/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_7/conv3" output_port_id="stage4_7/conv3" />
+		<IR name="stage4_7/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_7/sum" output_port_id="stage4_7/sum" />
+		<IR name="stage4_7/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_7/relu" output_port_id="stage4_7/sum" />
+		<IR name="stage4_7/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_8/conv1" output_port_id="stage4_8/conv1" />
+		<IR name="stage4_8/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_8/conv1/relu" output_port_id="stage4_8/conv1" />
+		<IR name="stage4_8/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage4_8/conv2" output_port_id="stage4_8/conv2" />
+		<IR name="stage4_8/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_8/conv3" output_port_id="stage4_8/conv3" />
+		<IR name="stage4_8/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_8/sum" output_port_id="stage4_8/sum" />
+		<IR name="stage4_8/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_8/relu" output_port_id="stage4_8/sum" />
+		<IR name="stage4_8/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="loc1/conv" output_port_id="loc1/conv" />
+		<IR name="loc1/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc1/permute" output_port_id="loc1/permute" />
+		<IR name="loc1/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc1/flatten" output_port_id="loc1/flatten" />
+		<IR name="loc1/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_1/conv1" output_port_id="stage5_1/conv1" />
+		<IR name="stage5_1/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_1/conv1/relu" output_port_id="stage5_1/conv1" />
+		<IR name="stage5_1/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage5_1/conv2" output_port_id="stage5_1/conv2" />
+		<IR name="stage5_1/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_1/conv3" output_port_id="stage5_1/conv3" />
+		<IR name="stage5_1/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_1/relu" output_port_id="stage5_1/conv3" />
+		<IR name="stage5_1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage5_2/conv1" output_port_id="stage5_2/conv1" />
+		<IR name="stage5_2/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_2/conv1/relu" output_port_id="stage5_2/conv1" />
+		<IR name="stage5_2/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage5_2/conv2" output_port_id="stage5_2/conv2" />
+		<IR name="stage5_2/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_2/conv3" output_port_id="stage5_2/conv3" />
+		<IR name="stage5_2/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_2/sum" output_port_id="stage5_2/sum" />
+		<IR name="stage5_2/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_2/relu" output_port_id="stage5_2/sum" />
+		<IR name="stage5_2/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage5_3/conv1" output_port_id="stage5_3/conv1" />
+		<IR name="stage5_3/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_3/conv1/relu" output_port_id="stage5_3/conv1" />
+		<IR name="stage5_3/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage5_3/conv2" output_port_id="stage5_3/conv2" />
+		<IR name="stage5_3/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_3/conv3" output_port_id="stage5_3/conv3" />
+		<IR name="stage5_3/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_3/sum" output_port_id="stage5_3/sum" />
+		<IR name="stage5_3/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_3/relu" output_port_id="stage5_3/sum" />
+		<IR name="stage5_3/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage5_4/conv1" output_port_id="stage5_4/conv1" />
+		<IR name="stage5_4/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_4/conv1/relu" output_port_id="stage5_4/conv1" />
+		<IR name="stage5_4/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage5_4/conv2" output_port_id="stage5_4/conv2" />
+		<IR name="stage5_4/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_4/conv3" output_port_id="stage5_4/conv3" />
+		<IR name="stage5_4/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_4/sum" output_port_id="stage5_4/sum" />
+		<IR name="stage5_4/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_4/relu" output_port_id="stage5_4/sum" />
+		<IR name="stage5_4/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="loc2/conv" output_port_id="loc2/conv" />
+		<IR name="loc2/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc2/permute" output_port_id="loc2/permute" />
+		<IR name="loc2/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc2/flatten" output_port_id="loc2/flatten" />
+		<IR name="loc2/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_1/conv4" output_port_id="stage6_1/conv4" />
+		<IR name="stage6_1/conv4" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_1/conv1" output_port_id="stage6_1/conv1" />
+		<IR name="stage6_1/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_1/conv1/relu" output_port_id="stage6_1/conv1" />
+		<IR name="stage6_1/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage6_1/conv2" output_port_id="stage6_1/conv2" />
+		<IR name="stage6_1/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_1/conv3" output_port_id="stage6_1/conv3" />
+		<IR name="stage6_1/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_1/sum" output_port_id="stage6_1/sum" />
+		<IR name="stage6_1/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_1/relu" output_port_id="stage6_1/sum" />
+		<IR name="stage6_1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage6_2/conv1" output_port_id="stage6_2/conv1" />
+		<IR name="stage6_2/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_2/conv1/relu" output_port_id="stage6_2/conv1" />
+		<IR name="stage6_2/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage6_2/conv2" output_port_id="stage6_2/conv2" />
+		<IR name="stage6_2/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_2/conv3" output_port_id="stage6_2/conv3" />
+		<IR name="stage6_2/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_2/sum" output_port_id="stage6_2/sum" />
+		<IR name="stage6_2/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_2/relu" output_port_id="stage6_2/sum" />
+		<IR name="stage6_2/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="loc3/conv" output_port_id="loc3/conv" />
+		<IR name="loc3/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc3/permute" output_port_id="loc3/permute" />
+		<IR name="loc3/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc3/flatten" output_port_id="loc3/flatten" />
+		<IR name="loc3/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_1/conv4" output_port_id="stage7_1/conv4" />
+		<IR name="stage7_1/conv4" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_1/conv1" output_port_id="stage7_1/conv1" />
+		<IR name="stage7_1/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_1/conv1/relu" output_port_id="stage7_1/conv1" />
+		<IR name="stage7_1/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage7_1/conv2" output_port_id="stage7_1/conv2" />
+		<IR name="stage7_1/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_1/conv3" output_port_id="stage7_1/conv3" />
+		<IR name="stage7_1/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_1/sum" output_port_id="stage7_1/sum" />
+		<IR name="stage7_1/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_1/relu" output_port_id="stage7_1/sum" />
+		<IR name="stage7_1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage7_2/conv1" output_port_id="stage7_2/conv1" />
+		<IR name="stage7_2/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_2/conv1/relu" output_port_id="stage7_2/conv1" />
+		<IR name="stage7_2/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage7_2/conv2" output_port_id="stage7_2/conv2" />
+		<IR name="stage7_2/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_2/conv3" output_port_id="stage7_2/conv3" />
+		<IR name="stage7_2/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_2/sum" output_port_id="stage7_2/sum" />
+		<IR name="stage7_2/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_2/relu" output_port_id="stage7_2/sum" />
+		<IR name="stage7_2/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="loc4/conv" output_port_id="loc4/conv" />
+		<IR name="loc4/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc4/permute" output_port_id="loc4/permute" />
+		<IR name="loc4/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc4/flatten" output_port_id="loc4/flatten" />
+		<IR name="loc4/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_1/conv4" output_port_id="stage8_1/conv4" />
+		<IR name="stage8_1/conv4" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_1/conv1" output_port_id="stage8_1/conv1" />
+		<IR name="stage8_1/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_1/conv1/relu" output_port_id="stage8_1/conv1" />
+		<IR name="stage8_1/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage8_1/conv2" output_port_id="stage8_1/conv2" />
+		<IR name="stage8_1/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_1/conv3" output_port_id="stage8_1/conv3" />
+		<IR name="stage8_1/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_1/sum" output_port_id="stage8_1/sum" />
+		<IR name="stage8_1/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_1/relu" output_port_id="stage8_1/sum" />
+		<IR name="stage8_1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage8_2/conv1" output_port_id="stage8_2/conv1" />
+		<IR name="stage8_2/conv1" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_2/conv1/relu" output_port_id="stage8_2/conv1" />
+		<IR name="stage8_2/conv1/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="stage8_2/conv2" output_port_id="stage8_2/conv2" />
+		<IR name="stage8_2/conv2" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_2/conv3" output_port_id="stage8_2/conv3" />
+		<IR name="stage8_2/conv3" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_2/sum" output_port_id="stage8_2/sum" />
+		<IR name="stage8_2/sum" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_2/relu" output_port_id="stage8_2/sum" />
+		<IR name="stage8_2/relu" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="loc5/conv" output_port_id="loc5/conv" />
+		<IR name="loc5/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc5/permute" output_port_id="loc5/permute" />
+		<IR name="loc5/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="loc5/flatten" output_port_id="loc5/flatten" />
+		<IR name="loc5/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="mbox_loc" output_port_id="mbox_loc" />
+		<IR name="mbox_loc" output_port_id="5" />
+	</map>
+	<map>
+		<framework name="cls1/conv" output_port_id="cls1/conv" />
+		<IR name="cls1/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls1/permute" output_port_id="cls1/permute" />
+		<IR name="cls1/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls1/flatten" output_port_id="cls1/flatten" />
+		<IR name="cls1/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls2/conv" output_port_id="cls2/conv" />
+		<IR name="cls2/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls2/permute" output_port_id="cls2/permute" />
+		<IR name="cls2/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls2/flatten" output_port_id="cls2/flatten" />
+		<IR name="cls2/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls3/conv" output_port_id="cls3/conv" />
+		<IR name="cls3/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls3/permute" output_port_id="cls3/permute" />
+		<IR name="cls3/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls3/flatten" output_port_id="cls3/flatten" />
+		<IR name="cls3/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls4/conv" output_port_id="cls4/conv" />
+		<IR name="cls4/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls4/permute" output_port_id="cls4/permute" />
+		<IR name="cls4/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls4/flatten" output_port_id="cls4/flatten" />
+		<IR name="cls4/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls5/conv" output_port_id="cls5/conv" />
+		<IR name="cls5/conv" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls5/permute" output_port_id="cls5/permute" />
+		<IR name="cls5/permute" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="cls5/flatten" output_port_id="cls5/flatten" />
+		<IR name="cls5/flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="mbox_conf" output_port_id="mbox_conf" />
+		<IR name="mbox_conf" output_port_id="5" />
+	</map>
+	<map>
+		<framework name="mbox_conf_reshape" output_port_id="mbox_conf_reshape" />
+		<IR name="mbox_conf_reshape" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="mbox_conf_softmax" output_port_id="mbox_conf_softmax" />
+		<IR name="mbox_conf_softmax" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="mbox_conf_flatten" output_port_id="mbox_conf_flatten" />
+		<IR name="mbox_conf_flatten" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage4_8/sum/prior_box" output_port_id="stage4_8/sum/prior_box" />
+		<IR name="stage4_8/sum/prior_box" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage5_4/sum/prior_box" output_port_id="stage5_4/sum/prior_box" />
+		<IR name="stage5_4/sum/prior_box" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage6_2/sum/prior_box" output_port_id="stage6_2/sum/prior_box" />
+		<IR name="stage6_2/sum/prior_box" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage7_2/sum/prior_box" output_port_id="stage7_2/sum/prior_box" />
+		<IR name="stage7_2/sum/prior_box" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="stage8_2/sum/prior_box" output_port_id="stage8_2/sum/prior_box" />
+		<IR name="stage8_2/sum/prior_box" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="mbox_priorbox" output_port_id="mbox_priorbox" />
+		<IR name="mbox_priorbox" output_port_id="5" />
+	</map>
+	<map>
+		<framework name="detection_output" output_port_id="detection_output" />
+		<IR name="detection_output" output_port_id="3" />
+	</map>
+</mapping>
