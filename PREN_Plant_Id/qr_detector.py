@@ -9,12 +9,13 @@ import requests
 import os
 from depthai_sdk import Previews, PreviewManager, PipelineManager, frameNorm
 
-directory = r"C:\Users\ckirc\Pictures\plant detection"
-blobdir = r'C:\Users\ckirc\Documents\hslu\semester_5\PREN\OpenCV\PREN_AVehicle_Plant_id\PREN_Plant_Id\detect\detect.blob'
+dirname = os.path.dirname(__file__)
+picture_dir = os.path.join(dirname, 'pictures')
+blob_dir = os.path.join(dirname, 'detect\detect.blob')
 api_key = '2b10glUixSPZOunMJ952kc5Pe'
 url = f'https://my-api.plantnet.org/v2/identify/all?api-key={api_key}'
 nr_imgs = 3
-os.chdir(directory)
+os.chdir(picture_dir)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-d', '--video_detection', action='store_true', help="debug only, displays video out and detects qr codes, works with -pi")
@@ -170,7 +171,7 @@ def video_detection(img, detector):
 def show_images():
     x = 0
     while x < nr_imgs:
-        name_img = f'{directory}\\plant_pic_{x}.jpg'
+        name_img = f'{picture_dir}\\plant_pic_{x}.jpg'
         img = cv2.imread(name_img)
         x += 1
         if img.data:
@@ -204,7 +205,7 @@ def take_images(cap, detector, use_pi=True, video_out=False):
         _, img = run_detection(cap, detector, use_pi, video_out)
         attempt += 1
         if img.any():
-            cv2.imwrite(f'{directory}\\plant_pic_{x}.jpg', img)
+            cv2.imwrite(f'{picture_dir}\\plant_pic_{x}.jpg', img)
             x += 1
             move_a_little_forward()
             print("img taken")
@@ -215,7 +216,7 @@ def take_images(cap, detector, use_pi=True, video_out=False):
 def send_imgs_to_API():
     x = 0
     while x < nr_imgs:
-        name_img = f'{directory}\\plant_pic_{x}.jpg'
+        name_img = f'{picture_dir}\\plant_pic_{x}.jpg'
         img = open(name_img, 'rb')
         if img:
             files = [('images', (name_img, img))]
@@ -263,7 +264,7 @@ def raw_detection():
 
     cam.setPreviewSize(384, 384)
     cam.setInterleaved(False)
-    nn.setBlobPath(blobdir)
+    nn.setBlobPath(blob_dir)
 
     xout_preview.setStreamName("preview")
     cam.preview.link(nn.input)
