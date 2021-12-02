@@ -10,7 +10,7 @@ import os
 from depthai_sdk import Previews, PreviewManager, PipelineManager, frameNorm
 
 directory = r"C:\Users\ckirc\Pictures\plant detection"
-blobdir = ()
+blobdir = r'C:\Users\ckirc\Documents\hslu\semester_5\PREN\OpenCV\PREN_AVehicle_Plant_id\PREN_Plant_Id\detect\detect.blob'
 api_key = '2b10glUixSPZOunMJ952kc5Pe'
 url = f'https://my-api.plantnet.org/v2/identify/all?api-key={api_key}'
 nr_imgs = 3
@@ -263,7 +263,7 @@ def raw_detection():
 
     cam.setPreviewSize(384, 384)
     cam.setInterleaved(False)
-    nn.setBlobPath(r'C:\Users\ckirc\Documents\hslu\semester_5\PREN\OpenCV\PREN_AVehicle_Plant_id\PREN_Plant_Id\detect\detect.blob')
+    nn.setBlobPath(blobdir)
 
     xout_preview.setStreamName("preview")
     cam.preview.link(nn.input)
