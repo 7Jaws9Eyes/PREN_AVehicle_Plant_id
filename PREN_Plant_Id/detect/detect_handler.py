@@ -1,6 +1,6 @@
 def decode(nn_manager, packet):
-  pass
+    print(packet)
 
 
 def draw(nn_manager, data, frames):
-  pass
+    print(data)
