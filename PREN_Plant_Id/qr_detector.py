@@ -11,7 +11,7 @@ from depthai_sdk import Previews, PreviewManager, PipelineManager, frameNorm
 
 dirname = os.path.dirname(__file__)
 picture_dir = os.path.join(dirname, 'pictures')
-blob_dir = os.path.join(dirname, 'detect\detect.blob')
+blob_dir = os.path.join(dirname, r'detect\detect.blob')
 api_key = '2b10glUixSPZOunMJ952kc5Pe'
 url = f'https://my-api.plantnet.org/v2/identify/all?api-key={api_key}'
 nr_imgs = 3
@@ -24,9 +24,9 @@ parser.add_argument('-pi', '--picam', action='store_true', help="use default sys
 parser.add_argument('-v', '--video', action='store_true', help="output video")
 args = parser.parse_args()
 
-def detect_plants(use_pi, video_out):
 
-    if args.pi or use_pi:
+def detect_plants(use_pi, video_out):
+    if args.picam or use_pi:
         # setup resources
         cap = cv2.VideoCapture(0)
         detector = cv2.QRCodeDetector()
@@ -40,29 +40,7 @@ def detect_plants(use_pi, video_out):
         cap.release()
         cv2.destroyAllWindows()
     else:
-        pipeline = dai.Pipeline()
-
-        # Define source and outputs
-        cam_rgb = pipeline.create(dai.node.ColorCamera)
-        xout_video = pipeline.create(dai.node.XLinkOut)
-
-        xout_video.setStreamName("video")
-
-        # Properties
-        cam_rgb.setBoardSocket(dai.CameraBoardSocket.RGB)
-        cam_rgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
-        cam_rgb.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
-        cam_rgb.setVideoSize(1920, 1080)
-        cam_rgb.setInterleaved(False)
-
-        xout_video.input.setBlocking(False)
-        xout_video.input.setQueueSize(1)
-
-        # Linking
-        cam_rgb.video.link(xout_video.input)
-
-        # qr detector
-        detector = cv2.QRCodeDetector()
+        pipeline, detector, xout_video = setup_oak()
 
         # Connect to device and start pipeline
         with dai.Device(pipeline) as device:
@@ -91,7 +69,6 @@ def run_detection(cap, detector, use_pi, video_out):
 
 
 def run_detection_with_video_noexit(use_pi):
-
     if use_pi:
         # set up camera object
         cap = cv2.VideoCapture(0)
@@ -112,29 +89,7 @@ def run_detection_with_video_noexit(use_pi):
         cap.release()
         cv2.destroyAllWindows()
     else:
-        pipeline = dai.Pipeline()
-
-        # Define source and outputs
-        cam_rgb = pipeline.create(dai.node.ColorCamera)
-        xout_video = pipeline.create(dai.node.XLinkOut)
-
-        xout_video.setStreamName("video")
-
-        # Properties
-        cam_rgb.setBoardSocket(dai.CameraBoardSocket.RGB)
-        cam_rgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
-        cam_rgb.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
-        cam_rgb.setVideoSize(1920, 1080)
-        cam_rgb.setInterleaved(False)
-
-        xout_video.input.setBlocking(False)
-        xout_video.input.setQueueSize(1)
-
-        # Linking
-        cam_rgb.video.link(xout_video.input)
-
-        # qr detector
-        detector = cv2.QRCodeDetector()
+        pipeline, detector, xout_video = setup_oak()
 
         # Connect to device and start pipeline
         with dai.Device(pipeline) as device:
@@ -150,11 +105,36 @@ def run_detection_with_video_noexit(use_pi):
             cv2.destroyAllWindows()
 
 
+def setup_oak():
+    pipeline = dai.Pipeline()
+
+    # Define source and outputs
+    cam_rgb = pipeline.create(dai.node.ColorCamera)
+    xout_video = pipeline.create(dai.node.XLinkOut)
+
+    xout_video.setStreamName("video")
+
+    # Properties
+    cam_rgb.setBoardSocket(dai.CameraBoardSocket.RGB)
+    cam_rgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
+    cam_rgb.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
+    cam_rgb.setVideoSize(1920, 1080)
+    cam_rgb.setInterleaved(False)
+
+    xout_video.input.setBlocking(False)
+    xout_video.input.setQueueSize(1)
+
+    # Linking
+    cam_rgb.video.link(xout_video.input)
+
+    # qr detector
+    detector = cv2.QRCodeDetector()
+
+    return pipeline, detector, xout_video
+
+
 def video_detection(img, detector):
     data, bbox, _ = detector.detectAndDecode(img)
-
-    # if there is a bounding box, draw one, along with the data
-    # (len(data) > 0)
     if bbox is not None and data:
         points = bbox[0]
         for i in range(len(points)):
@@ -180,7 +160,8 @@ def show_images():
         cv2.destroyAllWindows()
         return
 
-#debug
+
+# debug
 def plant_qr_detector(cap, detector):
     qr_found = False
     while not qr_found:
@@ -300,6 +281,10 @@ def raw_detection():
             print(labels, confidences)
 
         cv2.destroyAllWindows()
+
+
+def yolo_detection():
+
 
 
 if __name__ == '__main__':
