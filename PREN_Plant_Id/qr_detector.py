@@ -12,6 +12,7 @@ from depthai_sdk import Previews, PreviewManager, PipelineManager, frameNorm
 dirname = os.path.dirname(__file__)
 picture_dir = os.path.join(dirname, 'pictures')
 blob_dir = os.path.join(dirname, r'detect\detect.blob')
+yolo_blob = os.path.join(dirname, r'yolo-detect\qrcode-yolo3-6shave.blob')
 api_key = '2b10glUixSPZOunMJ952kc5Pe'
 url = f'https://my-api.plantnet.org/v2/identify/all?api-key={api_key}'
 nr_imgs = 3
@@ -22,6 +23,7 @@ parser.add_argument('-d', '--video_detection', action='store_true', help="debug 
 parser.add_argument('-r', '--raw', action='store_true', help="use nn to detect qr code")
 parser.add_argument('-pi', '--picam', action='store_true', help="use default sys cam")
 parser.add_argument('-v', '--video', action='store_true', help="output video")
+parser.add_argument('-y', '--yolo', action='store_true', help="use yolo nn")
 args = parser.parse_args()
 
 
@@ -238,7 +240,6 @@ def event_to_server(message):
 def raw_detection():
     classes = ["nothing", "QR_CODE"]
     pipeline = dai.Pipeline()
-    pm = PipelineManager()
     cam = pipeline.create(dai.node.ColorCamera)
     nn = pipeline.create(dai.node.NeuralNetwork)
     xout_preview = pipeline.create(dai.node.XLinkOut)
@@ -284,7 +285,44 @@ def raw_detection():
 
 
 def yolo_detection():
+    pipeline = dai.Pipeline()
+    cam = pipeline.create(dai.node.ColorCamera)
+    # nn = pipeline.create(dai.node.YoloDetectionNetwork)
+    nn = pipeline.createYoloDetectionNetwork()
+    nn.setConfidenceThreshold(0.5)
+    nn.setNumClasses(1)
+    nn.setAnchors(np.array([10, 14, 23, 27, 37, 58, 81, 82, 135, 169, 344, 319]))
+    nn.setAnchorMasks({"side26": np.array([0, 1, 2]), "side13": np.array([3, 4, 5])})
+    nn.setIouThreshold(0.5)
+    xout_preview = pipeline.create(dai.node.XLinkOut)
 
+    cam.setPreviewSize(416, 416)
+    cam.setInterleaved(False)
+    nn.setBlobPath(yolo_blob)
+
+    xout_preview.setStreamName("preview")
+    cam.preview.link(nn.input)
+    cam.preview.link(xout_preview.input)
+
+    # Send NN out to the host via XLink
+    nnXout = pipeline.create(dai.node.XLinkOut)
+    nnXout.setStreamName("nn")
+    nn.out.link(nnXout.input)
+
+    with dai.Device(pipeline) as device:
+        qNn = device.getOutputQueue(nnXout.getStreamName())
+        pv = device.getOutputQueue(xout_preview.getStreamName(), maxSize=1, blocking=False)
+        while True:
+            nnData = qNn.get()  # Blocking
+            frame = pv.get().getCvFrame()
+            print(nnData.detections[0])
+            cv2.imshow(xout_preview.getStreamName(), frame)
+            if cv2.waitKey(1) == ord('q'):
+                break
+
+            # print(labels, confidences)
+
+        cv2.destroyAllWindows()
 
 
 if __name__ == '__main__':
@@ -292,6 +330,8 @@ if __name__ == '__main__':
         run_detection_with_video_noexit(args.picam)
     elif args.raw:
         raw_detection()
+    elif args.yolo:
+        yolo_detection()
     else:
         detect_plants(args.picam, args.video)
 
